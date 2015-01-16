@@ -14,6 +14,7 @@ ede-projects.el
 .DS_Store
 places
 .smex-items
+custom.el
 savefile/
 /xinix-modules.el
 projectile-bookmarks.eld
