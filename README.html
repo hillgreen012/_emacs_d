@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>README.html</title>
+
+</head>
+
+<body>
+
+<p><a href="http://www.gnu.org/licenses/gpl-3.0.txt"><img src="https://img.shields.io/badge/license-GPL_3-green.svg" alt="License GPL 3" /></a>
+<a href="https://www.gittip.com/bbatsov/"><img src="http://img.shields.io/gittip/bbatsov.svg" alt="Gittip" title="" /></a></p>
+
+<h1>Emacs Xinix</h1>
+
+<p>Xinix is an Emacs distribution that aims to enhance the default
+Emacs experience.  Xinix alters a lot of the default settings,
+bundles a plethora of additional packages and adds its own core
+library to the mix. The final product offers an easy to use Emacs
+configuration for Emacs newcomers and lots of additional power for
+Emacs power users.</p>
+
+<p>Xinix is compatible <strong>ONLY with GNU Emacs 24.x</strong>. In general you're
+advised to always run Xinix with the latest Emacs - currently
+<strong>24.4</strong>.</p>
+
+<p><strong>Table of Contents</strong></p>
+
+<ul>
+<li><a href="#fast-forward">Fast Forward</a></li>
+<li><a href="#installing-emacs-24">Installing Emacs 24</a></li>
+<li><a href="#installation">Installation</a>
+<ul>
+<li><a href="#automated">Automated</a>
+<ul>
+<li><a href="#via-curl">Via Curl</a></li>
+<li><a href="#via-wget">Via Wget</a></li>
+</ul></li>
+<li><a href="#manual">Manual</a></li>
+</ul></li>
+<li><a href="#updating-xinix">Updating Xinix</a>
+<ul>
+<li><a href="#manual-update">Manual update</a>
+<ul>
+<li><a href="#update-all-bundled-packages">Update all bundled packages</a></li>
+<li><a href="#update-xinixs-code">Update Xinix's code</a></li>
+<li><a href="#restart-xinix">Restart Xinix</a></li>
+</ul></li>
+<li><a href="#automatic-update">Automatic update</a></li>
+</ul></li>
+<li><a href="#enabling-additional-modules">Enabling additional modules</a></li>
+<li><a href="#running">Running</a></li>
+<li><a href="#getting-to-know-xinix">Getting to know Xinix</a>
+<ul>
+<li><a href="#keymap">Keymap</a>
+<ul>
+<li><a href="#global">Global</a></li>
+<li><a href="#xinix-mode">Xinix Mode</a></li>
+<li><a href="#osx-modifier-keys">OSX modifier keys</a></li>
+<li><a href="#projectile">Projectile</a></li>
+<li><a href="#helm">Helm</a></li>
+<li><a href="#key-chords">Key-chords</a>
+<ul>
+<li><a href="#disabling-key-chords">Disabling key-chords</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#automatic-package-installation">Automatic package installation</a>
+<ul>
+<li><a href="#color-themes">Color Themes</a></li>
+<li><a href="#personalizing">Personalizing</a>
+<ul>
+<li><a href="#disabling-whitespace-mode">Disabling whitespace-mode</a></li>
+<li><a href="#disable-flyspell-mode">Disable flyspell-mode</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#caveats--pitfalls">Caveats &amp; Pitfalls</a>
+<ul>
+<li><a href="#updating-bundled-packages">Updating bundled packages</a></li>
+<li><a href="#problems-with-flyspell-mode">Problems with flyspell-mode</a></li>
+<li><a href="#ugly-colors-in-the-terminal-emacs-version">Ugly colors in the terminal Emacs version</a></li>
+<li><a href="#melpa-error-on-initial-startup">MELPA error on initial startup</a></li>
+<li><a href="#warnings-on-navigation-in-editor-buffers">Warnings on arrow navigation in editor buffers</a></li>
+<li><a href="#customized-c-a-behavior">Customized C-a behavior</a></li>
+<li><a href="#poor-ido-matching-performance-on-large-datasets">Poor ido matching performance on large datasets</a></li>
+<li><a href="#windows-compatibility">Windows compatibility</a></li>
+</ul></li>
+<li><a href="#known-issues">Known issues</a></li>
+<li><a href="#support">Support</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bugs--improvements">Bugs &amp; Improvements</a></li>
+</ul>
+
+<h2>Fast Forward</h2>
+
+<p>Assuming you're using an Unix-like OS (<code>*BSD</code>, <code>GNU/Linux</code>, <code>OS X</code>, <code>Solaris</code>,
+etc), you already have Emacs 24 installed, as well as <code>git</code> &amp; <code>curl</code> you
+can skip the whole manual and just type in your favorite shell the
+following command:</p>
+
+<p><code>bash
+curl -L http://git.io/epre | sh
+</code></p>
+
+<p>You can now power up your Emacs, sit back and enjoy Xinix,
+forgetting about the rest of this manual.</p>
+
+<p>There are two environment variables you can use to control the
+source repository and the installation directory. To change the
+installation directory:</p>
+
+<p><code>bash
+export XINIX_INSTALL_DIR="$HOME/.emacs.d" &amp;&amp; curl -L https://github.com/bbatsov/xinix/raw/master/utils/installer.sh | sh
+</code></p>
+
+<p>To change the source repository:</p>
+
+<p><code>bash
+export XINIX_URL="https://github.com/yourname/xinix.git" &amp;&amp; curl -L https://github.com/bbatsov/xinix/raw/master/utils/installer.sh | sh
+</code></p>
+
+<p>Note that the installer will back up any existing <code>.emacs</code> file or
+<code>.emacs.d</code> since it will unpack Xinix's code in <code>.emacs.d</code>. If
+you're doing a manual install make sure you don't have a <code>.emacs</code> file
+or back up your existing <code>.emacs.d</code> directory manually.</p>
+
+<p>Don't forget to adjust your <code>xinix-modules.el</code> file once the installation is done.
+By default most of the modules that ship with Xinix are not loaded.</p>
+
+<h2>Installing Emacs 24</h2>
+
+<p>Obviously to use the Emacs Xinix you have to install Emacs 24
+first. Have a look at the <a href="http://wikemacs.org/index.php/Installing_Emacs">WikEmacs articles on installing Emacs</a>.</p>
+
+<h2>Installation</h2>
+
+<h3>Automated</h3>
+
+<p>You can install <strong>Emacs Xinix</strong> via the command line with either <code>curl</code> or
+<code>wget</code>. Naturally <code>git</code> is also required.</p>
+
+<h4>Via Curl</h4>
+
+<p>If you're using <code>curl</code> type the following command:</p>
+
+<p><code>bash
+curl -L https://github.com/bbatsov/xinix/raw/master/utils/installer.sh | sh
+</code></p>
+
+<h4>Via Wget</h4>
+
+<p>If you're using <code>wget</code> type:</p>
+
+<p><code>bash
+wget --no-check-certificate https://github.com/bbatsov/xinix/raw/master/utils/installer.sh -O - | sh
+</code></p>
+
+<h3>Manual</h3>
+
+<p><code>bash
+git clone git://github.com/bbatsov/xinix.git path/to/local/repo
+ln -s path/to/local/repo ~/.emacs.d
+cd ~/.emacs.d
+</code></p>
+
+<p>If you are using Windows, you should check what Emacs thinks the <code>~</code> directory is by running Emacs and typing <code>C-x d ~/&lt;RET&gt;</code>, and then adjust the command appropriately.</p>
+
+<h2>Updating Xinix</h2>
+
+<h3>Manual update</h3>
+
+<p>The update procedure is fairly straightforward and consists of 3 steps:</p>
+
+<h4>Update all bundled packages</h4>
+
+<p>Just run <kbd>M-x package-list-packages RET U x</kbd>.</p>
+
+<h4>Update Xinix's code</h4>
+
+<p><code>bash
+cd path/to/xinix/installation
+git pull
+</code></p>
+
+<p>The <code>path/to/xinix/installation</code> is usually <code>~/.emacs.d</code> (at least
+on Unix systems).</p>
+
+<h4>Restart Xinix</h4>
+
+<p>It's generally a good idea to stop Emacs after you do the update. The
+next time Xinix starts it will install any new dependencies (if
+there are such).</p>
+
+<h3>Automatic update</h3>
+
+<p>Simply run <kbd>M-x xinix-update</kbd> from Emacs itself and restart Emacs afterwards.</p>
+
+<h2>Enabling additional modules</h2>
+
+<p>By default most of the modules that ship with Xinix are not loaded. For more information on the functionality provided by these modules visit the <a href="modules/doc/README.md">docs</a>.</p>
+
+<p>```lisp
+;;; Uncomment the modules you'd like to use and restart Xinix afterwards</p>
+
+<p>(require 'xinix-c)
+;; (require 'xinix-clojure)
+;; (require 'xinix-coffee)
+;; (require 'xinix-common-lisp)
+;; (require 'xinix-css)
+(require 'xinix-emacs-lisp)
+(require 'xinix-erc)
+;; (require 'xinix-erlang)
+;; (require 'xinix-elixir)
+;; (require 'xinix-haskell)
+(require 'xinix-js)
+;; (require 'xinix-latex)
+(require 'xinix-lisp)
+;; (require 'xinix-mediawiki)
+(require 'xinix-org)
+(require 'xinix-perl)
+;; (require 'xinix-python)
+;; (require 'xinix-ruby)
+;; (require 'xinix-scala)
+(require 'xinix-scheme)
+;; (require 'xinix-scss)
+;; (require 'xinix-web)
+(require 'xinix-xml)
+```</p>
+
+<p>You'll need to adjust your <code>xinix-modules.el</code> file once the
+installation is done. If you are doing a manual install then you first
+need to copy the <code>xinix-modules.el</code> available in the sample
+directory to the root of <code>path/to/xinix/installation</code> and then
+adjust that one.</p>
+
+<p>After you've uncommented a module you should either restart Emacs or evaluate the module
+<code>require</code> expression with <kbd>C-x C-e</kbd>.</p>
+
+<h2>Running</h2>
+
+<p>Nothing fancy here. Just start Emacs as usual. Personally I run Emacs
+in daemon mode:</p>
+
+<p><code>bash
+emacs --daemon
+</code></p>
+
+<p>Afterwards I connect to the server with either a terminal or a GUI
+client like this:</p>
+
+<p><code>bash
+emacsclient -t
+emacsclient -c
+</code></p>
+
+<p>You'd probably do well to put a few aliases in your <code>.zshrc</code> (or
+<code>.bashrc</code>):</p>
+
+<p><code>bash
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+alias vim='emacsclient -t'
+alias vi='emacsclient -t'
+</code></p>
+
+<p>The last two aliases are helpful if you're used to editing files from
+the command line using <code>vi(m)</code>.</p>
+
+<p>Also you can open a file with cursor on choosen line:</p>
+
+<p><code>bash
+emacsclient somefile:1234
+</code></p>
+
+<p>This will open file 'somefile' and set cursor on line 1234.</p>
+
+<h2>Getting to know Xinix</h2>
+
+<p>Certainly the best way to understand how Xinix enhances the default
+Emacs experience is to peruse Xinix's source code (which is
+obviously written in Emacs Lisp). Understanding the code is not
+necessary of course. Xinix includes a <code>xinix-mode</code> minor Emacs mode
+which collects some of the additional functionality added by
+Xinix. It also adds an additional keymap that binds many of those
+extensions to keybindings.</p>
+
+<h3>Keymap</h3>
+
+<h4>Global</h4>
+
+<p>Keybinding         | Description
+-------------------|------------------------------------------------------------
+<kbd>C-x \</kbd>   | <code>align-regexp</code>
+<kbd>C-+</kbd>     | Increase font size(<code>text-scale-increase</code>).
+<kbd>C--</kbd>     | Decrease font size(<code>text-scale-decrease</code>).
+<kbd>C-x O</kbd>   | Go back to previous window (the inverse of <code>other-window</code> (<code>C-x o</code>)).
+<kbd>C-^</kbd>     | Join two lines into one(<code>xinix-top-join-line</code>).
+<kbd>C-x p</kbd>   | Start <code>proced</code> (manage processes from Emacs; works only in Linux).
+<kbd>C-x m</kbd>   | Start <code>eshell</code>.
+<kbd>C-x M-m</kbd> | Start your default shell.
+<kbd>C-x C-m</kbd> | Alias for <code>M-x</code>.
+<kbd>M-X</kbd>     | Like <code>M-x</code> but limited to commands that are relevant to the active major mode.
+<kbd>C-h A</kbd>   | Run <code>apropos</code> (search in all Emacs symbols).
+<kbd>C-h C-m</kbd> | Display key bindings of current major mode and descriptions of every binding.
+<kbd>M-/</kbd>     | Run <code>hippie-expand</code> (a replacement for the default <code>dabbrev-expand</code>).
+<kbd>C-x C-b</kbd> | Open <code>ibuffer</code> (a replacement for the default <code>buffer-list</code>).
+<kbd>F11</kbd>     | Make the window full screen.
+<kbd>F12</kbd>     | Toggle the Emacs menu bar.
+<kbd>C-x g</kbd>   | Open Magit's status buffer.
+<kbd>M-Z</kbd>     | Zap up to char.
+<kbd>C-c J</kbd> or <kbd>Super-></kbd>   | Switch between buffers with <a href="https://github.com/waymondo/ace-jump-buffer"><code>ace-jump-buffer</code></a>
+<kbd>C-=</kbd>     | Run <code>expand-region</code> (incremental text selection).
+<kbd>C-a</kbd>     | Run <code>xinix-move-beginning-of-line</code>. Read <a href="http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/">this</a> for details.</p>
+
+<h4>Xinix Mode</h4>
+
+<p>Keybinding         | Description
+-------------------|------------------------------------------------------------
+<kbd>C-c o</kbd>   | Open the currently visited file with an external program.
+<kbd>C-c i</kbd>   | Search for a symbol, only for buffers that contain code
+<kbd>C-c g</kbd>   | Search in Google for the thing under point (or an interactive query).
+<kbd>C-c G</kbd>   | Search in GitHub for the thing under point (or an interactive query).
+<kbd>C-c y</kbd>   | Search in YouTube for the thing under point (or an interactive query).
+<kbd>C-c U</kbd>   | Search in Duckduckgo for the thing under point (or an interactive query).
+<kbd>C-S-RET</kbd> or <kbd>Super-o</kbd> | Insert an empty line above the current line and indent it properly.
+<kbd>S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line and indent it properly (as in most IDEs).
+<kbd>C-S-up</kbd> or <kbd>M-S-up</kbd> | Move the current line or region up.
+<kbd>C-S-down</kbd> or <kbd>M-S-down</kbd>| Move the current line or region down.
+<kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
+<kbd>C-c f</kbd> | Open recently visited file.
+<kbd>C-M-\</kbd> | Indent region (if selected) or the entire buffer.
+<kbd>C-c u</kbd> | Open a new buffer containing the contents of URL.
+<kbd>C-c e</kbd> | Eval a bit of Emacs Lisp code and replace it with its result.
+<kbd>C-c s</kbd> | Swap two active windows.
+<kbd>C-c D</kbd> | Delete current file and buffer.
+<kbd>C-c d</kbd> | Duplicate the current line (or region).
+<kbd>C-c M-d</kbd> | Duplicate and comment the current line (or region).
+<kbd>C-c r</kbd> | Rename the current buffer and its visiting file if any.
+<kbd>C-c t</kbd> | Open a terminal emulator (<code>ansi-term</code>).
+<kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
+<kbd>C-c TAB</kbd> | Indent and copy region to clipboard
+<kbd>C-c I</kbd> | Open user's init file.
+<kbd>C-c S</kbd> | Open shell's init file.
+<kbd>C-c . +</kbd> | Increment integer at point. Default is +1.
+<kbd>C-c . -</kbd> | Decrement integer at point. Default is -1.
+<kbd>C-c . *</kbd> | Multiply integer at point. Default is *2.
+<kbd>C-c . /</kbd> | Divide integer at point. Default is /2.
+<kbd>C-c . \</kbd> | Modulo integer at point. Default is modulo 2.
+<kbd>C-c . ^</kbd> | Power to the integer at point. Default is ^2.
+<kbd>C-c . &lt;</kbd> | Left-shift integer at point. Default is 1 position to the left.
+<kbd>C-c . ></kbd> | Right-shift integer at point. Default is 1 position to the right.
+<kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
+<kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
+<kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
+<kbd>Super-g</kbd> | Toggle between God mode and non-God mode
+<kbd>Super-r</kbd> | Recent files
+<kbd>Super-j</kbd> | Join lines
+<kbd>Super-k</kbd> | Kill whole line
+<kbd>Super-m m</kbd> | Magit status
+<kbd>Super-m l</kbd> | Magit log
+<kbd>Super-m f</kbd> | Magit file log
+<kbd>Super-m b</kbd> | Magit blame mode</p>
+
+<p><strong>Note</strong>: For various arithmetic operations, the prefix <code>C-c .</code> only needs to be pressed once for the first operation.
+For subsequent operations, only the appropriate operations (i.e. <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>... needs to be pressed).</p>
+
+<h4>OSX modifier keys</h4>
+
+<p>Xinix does not mess by default with the standard mapping of <code>Command</code> (to <code>Super</code>) and <code>Option</code> (to <code>Meta</code>).</p>
+
+<p>If you want to swap them add this to your personal config:</p>
+
+<p><code>lisp
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+</code></p>
+
+<p>You can also temporarily swap them with <code>C-c w</code> (<code>M-x xinix-swap-meta-and-super</code>).</p>
+
+<h4>Projectile</h4>
+
+<p>Here's a list of functionality provided by <a href="https://github.com/bbatsov/projectile">Projectile</a>:</p>
+
+<p>Keybinding         | Description
+-------------------|------------------------------------------------------------
+<kbd>C-c p f</kbd> | Display a list of all files in the project. With a prefix argument it will clear the cache first.
+<kbd>C-c p d</kbd> | Display a list of all directories in the project. With a prefix argument it will clear the cache first.
+<kbd>C-c p T</kbd> | Display a list of all test files(specs, features, etc) in the project.
+<kbd>C-c p s g</kbd> | Run grep on the files in the project.
+<kbd>M-- C-c p s g</kbd> | Run grep on <code>projectile-grep-default-files</code> in the project.
+<kbd>C-c p b</kbd> | Display a list of all project buffers currently open.
+<kbd>C-c p o</kbd> | Runs <code>multi-occur</code> on all project buffers currently open.
+<kbd>C-c p r</kbd> | Runs interactive query-replace on all files in the projects.
+<kbd>C-c p i</kbd> | Invalidates the project cache (if existing).
+<kbd>C-c p R</kbd> | Regenerates the projects <code>TAGS</code> file.
+<kbd>C-c p k</kbd> | Kills all project buffers.
+<kbd>C-c p D</kbd> | Opens the root of the project in <code>dired</code>.
+<kbd>C-c p e</kbd> | Shows a list of recently visited project files.
+<kbd>C-c p s a</kbd> | Runs <code>ack</code> on the project. Requires the presence of <code>ack-and-a-half</code>.
+<kbd>C-c p s s</kbd> | Runs <code>ag</code> on the project. Requires the presence of <code>ag.el</code>.
+<kbd>C-c p a</kbd> | Runs <code>ack</code> on the project. Requires the presence of <code>ack-and-a-half</code>.
+<kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
+<kbd>C-c p P</kbd> | Runs a standard test command for your type of project.
+<kbd>C-c p z</kbd> | Adds the currently visited to the cache.
+<kbd>C-c p p</kbd> | Display a list of known projects you can switch to.</p>
+
+<p>Xinix adds an extra keymap prefix <code>S-p</code> (<code>S</code> stands for
+<code>Super</code>), so you can use <code>S-p</code> instead of <code>C-c p</code>.</p>
+
+<p>If you ever forget any of Projectile's keybindings just do a:</p>
+
+<p><kbd>C-c p C-h</kbd></p>
+
+<h4>Helm</h4>
+
+<p>Helm is setup according to this guide: <a href="http://tuhdo.github.io/helm-intro.html">A Package in a league of its own: Helm</a>.</p>
+
+<p>You can learn Helm usage and key bindings following the guide. <kbd>C-c h</kbd> is Xinix's default prefix key for Helm.
+If you don't remember any key binding, append <kbd>C-h</kbd> after <kbd>C-c h</kbd> for a list of key bindings in Helm.</p>
+
+<p>If you love Helm and want to use Helm globally with enhanced <code>helm-find-files</code>, <code>helm-buffer-lists</code>..., you will have to also add <code>(require 'xinix-helm-everywhere)</code>.
+When <code>xinix-helm-everywhere</code> is activated, Helm enables these global key bindings:</p>
+
+<p>Key binding        | Description
+-------------------|----------------------------------------------
+<kbd>M-x</kbd>     | Run <a href="http://tuhdo.github.io/helm-intro.html#sec-3">helm-M-x</a>, an interactive version of <kbd>M-x</kdb>.
+<kbd>M-y</kbd>     | Run <a href="http://tuhdo.github.io/helm-intro.html#sec-4">helm-show-kill-ring</a>, shows the content of <code>kill-ring</code>.
+<kbd>C-x b </kbd>  | Run <a href="http://tuhdo.github.io/helm-intro.html#sec-5">helm-mini</a>, an interactive version of <code>C-x b</code> with more features.
+<kbd>C-x C-f</kbd> | Run <a href="http://tuhdo.github.io/helm-intro.html#sec-6">helm-find-files</a>, an interactive version of <code>find-file</code> with more features.
+<kbd>C-h f </kbd>  | Run <a href="http://tuhdo.github.io/helm-intro.html#sec-13">helm-apropos</a>, an interactive version of <code>apropos-command</code>.
+<kbd>C-h r</kbd>   | Run <a href="http://tuhdo.github.io/helm-intro.html#sec-14">helm-info-emacs</a>, an interactive version of <code>info-emacs-manual</code>.
+<kbd>C-h C-l </kbd>| Run <code>helm-locate-library</code> that can search for locations of any file loaded into Emacs.</p>
+
+<p>This key binding is activated in <code>shell-mode</code>:</p>
+
+<p>Key Binding        | Description
+-------------------|----------------------------------------------
+<kbd>C-c C-l</kbd>     | Run <code>helm-comint-input-ring</code> that shows <code>shell</code> history using Helm interface.</p>
+
+<p>This key bindings is activated in <code>eshell-mode</code>:</p>
+
+<p>Key Binding        | Description
+-------------------|----------------------------------------------
+<kbd>C-c C-l</kbd>     | Run <code>helm-eshell-history</code> that shows <code>eshell</code> history using Helm interface.</p>
+
+<p>If you prefer Ido in everywhere, you should not add <code>xinix-helm-everywhere</code>, so you can use Helm along with Ido and Xinix's default commands.</p>
+
+<p>You can always reactivate Helm with <code>(xinix-global-helm-global-mode-on)</code>.</p>
+
+<p><strong>NOTICE</strong>: In <code>helm-M-x</code>, you have to pass prefix argument <em>AFTER</em> you run <code>helm-M-x</code>,
+because your prefix argument will be displayed in the modeline when in <code>helm-M-x</code>
+buffer. Passing prefix argument <strong>BEFORE</strong> =helm-M-x= <strong>has no effect</strong>.</p>
+
+<h4>Key-chords</h4>
+
+<p><strong>Key-chords are available only when the <code>xinix-key-chord</code> module has been enabled.</strong></p>
+
+<p>Keybinding         | Description
+-------------------|----------------------------------------------
+<kbd>jj</kbd>      | Jump to the beginning of a word(<code>ace-jump-word-mode</code>)
+<kbd>jk</kbd>      | Jump to a character(<code>ace-jump-char-mode</code>)
+<kbd>jl</kbd>      | Jump to the beginning of a line(<code>ace-jump-line-mode</code>)
+<kbd>JJ</kbd>      | Jump back to previous buffer(<code>xinix-switch-to-previous-buffer</code>)
+<kbd>uu</kbd>      | View edits as a tree(<code>undo-tree-visualize</code>)
+<kbd>xx</kbd>      | Executed extended command(<code>execute-extended-command</code>)
+<kbd>yy</kbd>      | Browse the kill ring(<code>browse-kill-ring</code>)</p>
+
+<h5>Disabling key-chords</h5>
+
+<p>In some cases you may not want to have a key-chord that is defined by xinix,
+in which case you can disable the binding in your <code>personal.el</code> file by setting
+its command to <code>nil</code>. For example, to disable the <code>jj</code> key-chord add the
+following line:</p>
+
+<p><code>lisp
+(key-chord-define-global "jj" nil)
+</code></p>
+
+<p>If you're an <code>evil-mode</code> user you'll probably do well to disable <code>key-chord-mode</code> altogether:</p>
+
+<p><code>lisp
+(key-chord-mode -1)
+</code></p>
+
+<h4>vim emulation</h4>
+
+<p>If you want to use vim inside of emacs enable the <code>xinix-evil</code> module which provides
+support for <code>evil-mode</code>.</p>
+
+<h2>Automatic package installation</h2>
+
+<p>The default Xinix installation comes with a bare minimum of
+functionality. It will however install add-ons for various programming
+languages and frameworks on demand. For instance - if you try to open
+a <code>.clj</code> file <code>clojure-mode</code>, <code>cider</code> and Xinix's enhanced Lisp
+configuration will be installed automatically for you.</p>
+
+<p>You can, of course, install anything you wish manually as well.</p>
+
+<h3>Color Themes</h3>
+
+<p>Emacs 24 ships with a new theming facility that effectively renders
+the old color-theme package obsolete. Emacs 24 provides a dozen of
+built-in themes you can use out-of-the-box by invoking the <code>M-x
+load-theme</code> command.</p>
+
+<p><a href="https://github.com/bbatsov/zenburn-emacs">Zenburn</a> is the default color theme in Xinix, but you can change it
+at your discretion. Why Zenburn? I (and lots of hackers around the
+world) find it pretty neat for some reason. Personally I find the
+default theme pretty tiresome for the eyes, that's why I took that
+"controversial" decision to replace it. You can, of course, easily go
+back to the default (or select another theme entirely).</p>
+
+<p>To disable Zenburn just put in your personal config the following
+line:</p>
+
+<p><code>lisp
+(disable-theme 'zenburn)
+</code></p>
+
+<p>Or you can use another theme altogether by adding something in <code>personal/preload</code> like:</p>
+
+<p><code>lisp
+(setq xinix-theme 'solarized-dark)
+</code></p>
+
+<p><strong>P.S.</strong> Solarized is not available by default - you'll have to
+  install it from MELPA first (<code>M-x package-install RET
+  solarized-theme</code>).</p>
+
+<h3>Personalizing</h3>
+
+<p>Fork the official Xinix repo and add your own touch to it. You're advised to avoid changing stuff outside of the
+personal folder to avoid having to deal with git merge conflicts in the future.</p>
+
+<p>If you'd like to add some auto installation of packages in your
+personal config use the following code:</p>
+
+<p><code>lisp
+(xinix-require-packages '(some-package some-other-package))
+</code></p>
+
+<p>If you require just a single package you can also use:</p>
+
+<p><code>lisp
+(xinix-require-package 'some-package)
+</code></p>
+
+<h4>Preloading personal config</h4>
+
+<p>Sometimes you might want to load code before Xinix has started loading. Xinix will automatically preload all
+Emacs Lisp files in your <code>personal/preload</code> directory. Note that at this point you can't using anything from
+Xinix, except a few variables like <code>xinix-dir</code>, etc (since nothing is yet loaded).</p>
+
+<h4>Disabling whitespace-mode</h4>
+
+<p>Although <code>whitespace-mode</code> is awesome some people might find it too
+intrusive. You can disable it in your
+personal config with the following bit of code:</p>
+
+<p><code>lisp
+(setq xinix-whitespace nil)
+</code></p>
+
+<p>If you like <code>whitespace-mode</code> but prefer it to not automatically
+cleanup your file on save, you can disable that behavior by setting
+xinix-clean-whitespace-on-save to nil in your config file with:</p>
+
+<p><code>lisp
+(setq xinix-clean-whitespace-on-save nil)
+</code></p>
+
+<p>The xinix-clean-whitespace-on-save setting can also be set on a
+per-file or directory basis by using a file variable or a
+.dir-locals.el file.</p>
+
+<h4>Disable flyspell-mode</h4>
+
+<p>If you're not fond of spellchecking on the fly:</p>
+
+<p><code>lisp
+(setq xinix-flyspell nil)
+</code></p>
+
+<h2>Caveats &amp; Pitfalls</h2>
+
+<h3>Updating bundled packages</h3>
+
+<p>Generally it's a good idea to do a package update before running
+updating Xinix, since the latest Xinix code might depend on newer
+versions of the bundled packages than you would currently have
+installed.</p>
+
+<p>If you're doing manual Xinix updates you should always do a package update first.</p>
+
+<p><code>M-x package-list-packages RET U x</code></p>
+
+<p>That's not necessary if you're using <code>M-x xinix-update</code>, since it
+will automatically update the installed packages.</p>
+
+<h3>Problems with flyspell-mode</h3>
+
+<p>Xinix makes heavy use of the flyspell-mode package for spell
+checking of various things. The proper operation of flyspell depends
+on the presence of the <code>aspell</code> program and an <code>en</code> dictionary on your
+system. You can install <code>aspell</code> and the dictionary on OS X with
+<code>homebrew</code> like this:</p>
+
+<p><code>bash
+brew install aspell --with-lang=en
+</code></p>
+
+<p>On Linux distros - just use your distro's package manager.</p>
+
+<h3>Ugly colors in the terminal Emacs version</h3>
+
+<p>If your Emacs looks considerably uglier in a terminal (compared to the
+GUI version) try adding this to your <code>.bashrc</code> or <code>.zshrc</code>:</p>
+
+<p><code>bash
+export TERM=xterm-256color
+</code></p>
+
+<p>Source the <code>.bashrc</code> file and start Emacs again.</p>
+
+<h3>MELPA error on initial startup</h3>
+
+<p>If you get some http connection error related to the MELPA repo
+just do a manual <code>M-x package-refresh-contents</code> and restart Emacs
+afterwards.</p>
+
+<h3>Warnings on arrow navigation in editor buffers</h3>
+
+<p>This is not a bug - it's a feature! I firmly believe that the one true
+way to use Emacs is by using it the way it was intended to be used (as
+far as navigation is concerned at least).</p>
+
+<p>If you'd like to be take this a step further and disable the arrow key navigation
+completely put this in your personal config:</p>
+
+<p><code>lisp
+(setq guru-warn-only nil)
+</code></p>
+
+<p>To disable <code>guru-mode</code> completely add the following snippet to your
+personal Emacs config:</p>
+
+<p><code>lisp
+(setq xinix-guru nil)
+</code></p>
+
+<h3>Customized C-a behavior</h3>
+
+<p>Xinix overrides <code>C-a</code> to behave as described
+<a href="http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/">here</a>. If
+you don't like that simply add this to your personal config:</p>
+
+<p><code>lisp
+(global-set-key [remap move-beginning-of-line]
+                'move-beginning-of-line)
+</code></p>
+
+<h3>Poor ido matching performance on large datasets</h3>
+
+<p>Xinix swaps the default <code>ido</code> flex matching with the more powerful
+<a href="https://github.com/lewang/flx">ido-flx</a>.</p>
+
+<p>The sorting algorithm <code>flx</code> uses is more complex, but yields better results.</p>
+
+<p>On slower machines, it may be necessary to lower <code>flx-ido-threshold</code> to
+ensure a smooth experience.</p>
+
+<p><code>lisp
+(setq flx-ido-threshold 1000)
+</code></p>
+
+<p>You can always disable the improved sorting algorithm all together like this:</p>
+
+<p><code>lisp
+(flx-ido-mode -1)
+</code></p>
+
+<h3>Windows compatibility</h3>
+
+<p>While everything in Xinix should work fine in Windows, I test it only
+with Linux &amp; OSX, so there are Windows related problems from time to
+time. This situation will probably improve over time.</p>
+
+<h2>Known issues</h2>
+
+<p>Check out the project's
+<a href="https://github.com/bbatsov/xinix/issues?sort=created&amp;direction=desc&amp;state=open">issue list</a>
+a list of unresolved issues. By the way - feel free to fix any of them
+and send me a pull request. :-)</p>
+
+<h2>Support</h2>
+
+<p>Support is available via the Xinix Google Group <a href="&#109;&#97;&#x69;l&#116;&#111;:&#x65;m&#x61;&#x63;&#x73;&#x2D;&#112;&#114;&#x65;&#x6C;&#117;&#x64;&#101;&#64;&#103;&#x6F;&#111;&#103;&#x6C;&#101;&#x67;r&#x6F;&#117;&#x70;&#115;.&#x63;&#x6F;&#x6D;">&#x65;m&#x61;&#x63;&#x73;&#x2D;&#112;&#114;&#x65;&#x6C;&#117;&#x64;&#101;&#64;&#103;&#x6F;&#111;&#103;&#x6C;&#101;&#x67;r&#x6F;&#117;&#x70;&#115;.&#x63;&#x6F;&#x6D;</a>.</p>
+
+<p>There's also a Freenode channel you can visit - <code>#xinix-emacs</code>.</p>
+
+<h2>Contributors</h2>
+
+<p>Here's a <a href="https://github.com/bbatsov/xinix/contributors">list</a> of all the people who have contributed to the
+development of Emacs Xinix.</p>
+
+<h2>Bugs &amp; Improvements</h2>
+
+<p>Bug reports and suggestions for improvements are always
+welcome. GitHub pull requests are even better! :-)</p>
+
+<p>I'm also accepting financial contributions via <a href="https://www.gittip.com/bbatsov">gittip</a>.</p>
+
+<p><a href="https://www.gittip.com/bbatsov"><img src="https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png" alt="Support via Gittip" title="" /></a></p>
+
+<p>Cheers,<br/>
+<a href="https://twitter.com/bbatsov">Bozhidar</a></p>
+
+</body>
+</html>
