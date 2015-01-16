@@ -1,5 +1,5 @@
 *~
-*.elc
+*.elc*
 abbrev_defs
 auto-save-list
 recentf
@@ -16,7 +16,6 @@ places
 .smex-items
 custom.el
 savefile/
-/xinix-modules.el
 projectile-bookmarks.eld
 session*
 .cask

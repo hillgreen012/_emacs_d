@@ -81,7 +81,9 @@
           (when (buffer-modified-p)
             (basic-save-buffer-1)))))))
 
-(when (fboundp 'exec-path-from-shell-copy-env)
+
+(when (and (not (string= system-type "windows-nt"))
+           (fboundp 'exec-path-from-shell-copy-env))
   (exec-path-from-shell-copy-env "PYTHONPATH"))
 
 (defun xinix-python-mode-defaults ()
