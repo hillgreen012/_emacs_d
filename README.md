@@ -1,5 +1,4 @@
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
-[![Gittip](http://img.shields.io/gittip/bbatsov.svg)](https://www.gittip.com/bbatsov/)
 
 Emacs Xinix
 =============
@@ -79,13 +78,13 @@ source repository and the installation directory. To change the
 installation directory:
 
 ```bash
-export XINIX_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/bbatsov/xinix/raw/master/utils/installer.sh | sh
+export XINIX_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/hillgreen012/xinix/raw/master/utils/installer.sh | sh
 ```
 
 To change the source repository:
 
 ```bash
-export XINIX_URL="https://github.com/yourname/xinix.git" && curl -L https://github.com/bbatsov/xinix/raw/master/utils/installer.sh | sh
+export XINIX_URL="https://github.com/yourname/xinix.git" && curl -L https://github.com/hillgreen012/xinix/raw/master/utils/installer.sh | sh
 ```
 
 Note that the installer will back up any existing `.emacs` file or
@@ -113,7 +112,7 @@ You can install **Emacs Xinix** via the command line with either `curl` or
 If you're using `curl` type the following command:
 
 ```bash
-curl -L https://github.com/bbatsov/xinix/raw/master/utils/installer.sh | sh
+curl -L https://github.com/hillgreen012/xinix/raw/master/utils/installer.sh | sh
 ```
 
 #### Via Wget
@@ -121,13 +120,13 @@ curl -L https://github.com/bbatsov/xinix/raw/master/utils/installer.sh | sh
 If you're using `wget` type:
 
 ```bash
-wget --no-check-certificate https://github.com/bbatsov/xinix/raw/master/utils/installer.sh -O - | sh
+wget --no-check-certificate https://github.com/hillgreen012/xinix/raw/master/utils/installer.sh -O - | sh
 ```
 
 ### Manual
 
 ```bash
-git clone git://github.com/bbatsov/xinix.git path/to/local/repo
+git clone git://github.com/hillgreen012/xinix.git path/to/local/repo
 ln -s path/to/local/repo ~/.emacs.d
 cd ~/.emacs.d
 ```
@@ -657,34 +656,3 @@ While everything in Xinix should work fine in Windows, I test it only
 with Linux & OSX, so there are Windows related problems from time to
 time. This situation will probably improve over time.
 
-## Known issues
-
-Check out the project's
-[issue list](https://github.com/bbatsov/xinix/issues?sort=created&direction=desc&state=open)
-a list of unresolved issues. By the way - feel free to fix any of them
-and send me a pull request. :-)
-
-## Support
-
-Support is available via the Xinix Google Group <emacs-xinix@googlegroups.com>.
-
-There's also a Freenode channel you can visit - `#xinix-emacs`.
-
-## Contributors
-
-Here's a [list](https://github.com/bbatsov/xinix/contributors) of all the people who have contributed to the
-development of Emacs Xinix.
-
-## Bugs & Improvements
-
-Bug reports and suggestions for improvements are always
-welcome. GitHub pull requests are even better! :-)
-
-I'm also accepting financial contributions via [gittip](https://www.gittip.com/bbatsov).
-
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
-
-Cheers,<br/>
-[Bozhidar](https://twitter.com/bbatsov)
-
-[badge-license]: https://img.shields.io/badge/license-GPL_3-green.svg
