@@ -16,7 +16,6 @@ advised to always run Xinix with the latest Emacs - currently
 
 **Table of Contents**
 
-- [Fast Forward](#fast-forward)
 - [Installing Emacs 24](#installing-emacs-24)
 - [Installation](#installation)
 	- [Automated](#automated)
@@ -59,42 +58,6 @@ advised to always run Xinix with the latest Emacs - currently
 - [Contributors](#contributors)
 - [Bugs & Improvements](#bugs--improvements)
 
-## Fast Forward
-
-Assuming you're using an Unix-like OS (`*BSD`, `GNU/Linux`, `OS X`, `Solaris`,
-etc), you already have Emacs 24 installed, as well as `git` & `curl` you
-can skip the whole manual and just type in your favorite shell the
-following command:
-
-```bash
-curl -L http://git.io/epre | sh
-```
-
-You can now power up your Emacs, sit back and enjoy Xinix,
-forgetting about the rest of this manual.
-
-There are two environment variables you can use to control the
-source repository and the installation directory. To change the
-installation directory:
-
-```bash
-export XINIX_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/hillgreen012/xinix/raw/master/utils/installer.sh | sh
-```
-
-To change the source repository:
-
-```bash
-export XINIX_URL="https://github.com/yourname/xinix.git" && curl -L https://github.com/hillgreen012/xinix/raw/master/utils/installer.sh | sh
-```
-
-Note that the installer will back up any existing `.emacs` file or
-`.emacs.d` since it will unpack Xinix's code in `.emacs.d`. If
-you're doing a manual install make sure you don't have a `.emacs` file
-or back up your existing `.emacs.d` directory manually.
-
-Don't forget to adjust your `xinix-modules.el` file once the installation is done.
-By default most of the modules that ship with Xinix are not loaded.
-
 ## Installing Emacs 24
 
 Obviously to use the Emacs Xinix you have to install Emacs 24
@@ -102,36 +65,13 @@ first. Have a look at the [WikEmacs articles on installing Emacs](http://wikemac
 
 ## Installation
 
-### Automated
-
-You can install **Emacs Xinix** via the command line with either `curl` or
-`wget`. Naturally `git` is also required.
-
-#### Via Curl
-
-If you're using `curl` type the following command:
-
-```bash
-curl -L https://github.com/hillgreen012/xinix/raw/master/utils/installer.sh | sh
-```
-
-#### Via Wget
-
-If you're using `wget` type:
-
-```bash
-wget --no-check-certificate https://github.com/hillgreen012/xinix/raw/master/utils/installer.sh -O - | sh
-```
-
-### Manual
-
 ```bash
 git clone git://github.com/hillgreen012/xinix.git path/to/local/repo
 ln -s path/to/local/repo ~/.emacs.d
 cd ~/.emacs.d
 ```
 
-If you are using Windows, you should check what Emacs thinks the `~` directory is by running Emacs and typing `C-x d ~/<RET>`, and then adjust the command appropriately.
+If you are using Windows, you should check what Emacs thinks the `~` directory is by running Emacs and typing `C-x d ~/<RET>`, and then adjust the command appropriately. Or you can set your environment variable "HOME" as your need through "My Computer---RightClick--->Attributes--->Advanced--->Environment Variables".
 
 ## Updating Xinix
 
@@ -165,7 +105,9 @@ Simply run <kbd>M-x xinix-update</kbd> from Emacs itself and restart Emacs after
 
 ## Enabling additional modules
 
-By default most of the modules that ship with Xinix are not loaded. For more information on the functionality provided by these modules visit the [docs](modules/doc/README.md).
+By default most of the modules that ship with Xinix are not loaded.
+For more information on the functionality provided by these modules
+visit the [docs](modules/doc/README.md).
 
 ```lisp
 ;;; Uncomment the modules you'd like to use and restart Xinix afterwards
@@ -473,18 +415,18 @@ the old color-theme package obsolete. Emacs 24 provides a dozen of
 built-in themes you can use out-of-the-box by invoking the `M-x
 load-theme` command.
 
-[Zenburn](https://github.com/bbatsov/zenburn-emacs) is the default color theme in Xinix, but you can change it
-at your discretion. Why Zenburn? I (and lots of hackers around the
+[Manoj-dark] is the default color theme in Xinix, but you can change it
+at your discretion. Why Manoj-dark? I (and lots of hackers around the
 world) find it pretty neat for some reason. Personally I find the
 default theme pretty tiresome for the eyes, that's why I took that
 "controversial" decision to replace it. You can, of course, easily go
 back to the default (or select another theme entirely).
 
-To disable Zenburn just put in your personal config the following
+To disable Manoj-dark just put in your personal config the following
 line:
 
 ```lisp
-(disable-theme 'zenburn)
+(disable-theme 'manoj-dark)
 ```
 
 Or you can use another theme altogether by adding something in `personal/preload` like:
@@ -524,11 +466,11 @@ Xinix, except a few variables like `xinix-dir`, etc (since nothing is yet loaded
 #### Disabling whitespace-mode
 
 Although `whitespace-mode` is awesome some people might find it too
-intrusive. You can disable it in your
+intrusive. You can enable it in your
 personal config with the following bit of code:
 
 ```lisp
-(setq xinix-whitespace nil)
+(setq xinix-whitespace t)
 ```
 
 If you like `whitespace-mode` but prefer it to not automatically
@@ -652,7 +594,4 @@ You can always disable the improved sorting algorithm all together like this:
 
 ### Windows compatibility
 
-While everything in Xinix should work fine in Windows, I test it only
-with Linux & OSX, so there are Windows related problems from time to
-time. This situation will probably improve over time.
-
+While everything in Xinix should work fine in Windows.
