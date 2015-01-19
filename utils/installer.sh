@@ -230,10 +230,5 @@ else
 fi
 
 printf "\n"
-printf "$BBLUE  ____           _           _       \n"
-printf "$BBLUE |  _ \ _ __ ___| |_   _  __| | ___  \n"
-printf "$BBLUE | |_) |  __/ _ \ | | | |/ _  |/ _ \ \n"
-printf "$BBLUE |  __/| | |  __/ | |_| | (_| |  __/ \n"
-printf "$BBLUE |_|   |_|  \___|_|\__,_|\__,_|\___| \n\n"
-printf "$GREEN ... is now installed and ready to do thy bidding, Master $USER!$RESET\n"
+printf "$GREEN XINIX is now installed and ready to do thy bidding, Master $USER!$RESET\n"
 printf "$GREEN Don't forget to adjust the modules you want to use in $XINIX_INSTALL_DIR/xinix-modules.el!$RESET\n"
