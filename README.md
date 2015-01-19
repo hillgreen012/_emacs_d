@@ -1,5 +1,3 @@
-[![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
-
 Emacs Xinix
 =============
 
@@ -18,10 +16,6 @@ advised to always run Xinix with the latest Emacs - currently
 
 - [Installing Emacs 24](#installing-emacs-24)
 - [Installation](#installation)
-	- [Automated](#automated)
-		- [Via Curl](#via-curl)
-		- [Via Wget](#via-wget)
-	- [Manual](#manual)
 - [Updating Xinix](#updating-xinix)
 	- [Manual update](#manual-update)
 		- [Update all bundled packages](#update-all-bundled-packages)
@@ -53,10 +47,6 @@ advised to always run Xinix with the latest Emacs - currently
 	- [Customized C-a behavior](#customized-c-a-behavior)
 	- [Poor ido matching performance on large datasets](#poor-ido-matching-performance-on-large-datasets)
 	- [Windows compatibility](#windows-compatibility)
-- [Known issues](#known-issues)
-- [Support](#support)
-- [Contributors](#contributors)
-- [Bugs & Improvements](#bugs--improvements)
 
 ## Installing Emacs 24
 
