@@ -57,7 +57,7 @@ colors_ () {
 #   Enable colors
 # -s/--source [url]
 #   Clone xinix from 'url'.
-#   Defaults to 'https://github.com/bbatsov/xinix.git'
+#   Defaults to 'https://github.com/hillgreen012/_emacs_d.git'
 # -i/--into
 #   If one exists, install into the existing config
 # -n/--no-bytecompile
@@ -74,7 +74,7 @@ usage() {
     printf "  \t \t \t \t If 'dir' is a relative path prefix with $HOME.\n"
     printf "  \t \t \t \t Defaults to $HOME/.emacs.d\n"
     printf "  -s, --source [url] \t \t Clone xinix from 'url'.\n"
-    printf "  \t \t \t \t Defaults to 'https://github.com/bbatsov/xinix.git'.\n"
+    printf "  \t \t \t \t Defaults to 'https://github.com/hillgreen012/_emacs_d.git'.\n"
     printf "  -n, --no-bytecompile \t \t Skip the bytecompilation step of xinix.\n"
     printf "  -i, --into \t \t \t Install Xinix into a subdirectory in the existing configuration\n"
     printf "  \t \t \t \t The default behavious is to install xinix into the existing\n"
@@ -125,7 +125,7 @@ done
 
 VERBOSE_COLOR=$BBLUE
 
-[ -z "$XINIX_URL" ] && XINIX_URL="https://github.com/bbatsov/xinix.git"
+[ -z "$XINIX_URL" ] && XINIX_URL="https://github.com/hillgreen012/_emacs_d.git"
 [ -z "$XINIX_INSTALL_DIR" ] && XINIX_INSTALL_DIR="$HOME/.emacs.d"
 
 if [ x$XINIX_VERBOSE != x ]
