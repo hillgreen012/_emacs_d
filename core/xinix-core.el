@@ -81,16 +81,18 @@ PROMPT sets the `read-string prompt."
               (read-string prompt))))))
 
 (defmacro xinix-install-search-engine (search-engine-name search-engine-url search-engine-prompt)
-  "Given some information regarding a search engine, install the interactive command to search through them"
+  "Given some information regarding SEARCH-ENGINE-NAME, SEARCH-ENGINE-URL, SEARCH-ENGINE-PROMPT install the interactive command to search through them."
   `(defun ,(intern (format "xinix-%s" search-engine-name)) ()
        ,(format "Search %s with a query or region if any." search-engine-name)
        (interactive)
        (xinix-search ,search-engine-url ,search-engine-prompt)))
 
-(xinix-install-search-engine "google"     "http://www.google.com/search?q="              "Google: ")
+(xinix-install-search-engine "google"     "http://www.google.com/search?q="              "Search Google: ")
 (xinix-install-search-engine "youtube"    "http://www.youtube.com/results?search_query=" "Search YouTube: ")
 (xinix-install-search-engine "github"     "https://github.com/search?q="                 "Search GitHub: ")
 (xinix-install-search-engine "duckduckgo" "https://duckduckgo.com/?t=lm&q="              "Search DuckDuckGo: ")
+(xinix-install-search-engine "haoso"      "http://www.haosou.com/s?q="                   "Search haoso: ")
+(xinix-install-search-engine "baidu"      "http://www.baidu.com/s?wd="                   "Search Baidu: ")
 
 (defun xinix-indent-rigidly-and-copy-to-clipboard (begin end arg)
   "Indent region between BEGIN and END by ARG columns and copy to clipboard."
@@ -192,8 +194,7 @@ point reaches the beginning or end of the buffer, stop there."
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 (defun xinix-get-positions-of-line-or-region ()
-  "Return positions (beg . end) of the current line
-or region."
+  "Return positions (beg . end) of the current line or region."
   (let (beg end)
     (if (and mark-active (> (point) (mark)))
         (exchange-point-and-mark))
@@ -390,6 +391,8 @@ Doesn't mess with special buffers."
     "Press <C-c G> to search in GitHub."
     "Press <C-c y> to search in YouTube."
     "Press <C-c U> to search in DuckDuckGo."
+    "Press <C-c H> to search in Haoso."
+    "Press <C-c B> to search in Baidu."
     "Press <C-c r> to rename the current buffer and the file it's visiting if any."
     "Press <C-c t> to open a terminal in Emacs."
     "Press <C-c k> to kill all the buffers, but the active one."

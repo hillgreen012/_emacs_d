@@ -3,7 +3,7 @@
 ;; Emacs IRC client
 (require 'xinix-erc)
 (require 'xinix-ido) ;; Super charges Emacs completion for C-x C-f and more
-(require 'xinix-helm) ;; Interface for narrowing and search
+(require 'xinix-helm)            ;; Interface for narrowing and search
 (require 'xinix-helm-everywhere) ;; Enable Helm everywhere
 (require 'xinix-company)
 (require 'xinix-key-chord) ;; Binds useful features to key combinations
