@@ -93,9 +93,6 @@
 ;; FIXME: pick terminal friendly binding
 ;; (define-key prog-mode-map (kbd "M-[") (xinix-wrap-with "["))
 (define-key prog-mode-map (kbd "M-\"") (xinix-wrap-with "\""))
-(define-key prog-mode-map (kbd "C-j") 'newline-and-indent)
-
-(global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; disable annoying blink-matching-paren
 (setq blink-matching-paren nil)

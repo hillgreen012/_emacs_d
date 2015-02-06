@@ -33,7 +33,6 @@
 ;;; Code:
 
 (xinix-require-packages '(web-mode))
-
 (require 'web-mode)
 
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -71,6 +70,20 @@
 
      (add-hook 'web-mode-hook (lambda ()
                                 (run-hooks 'xinix-web-mode-hook)))))
+
+(xinix-require-package 'jinja2-mode)
+(require 'jinja2-mode)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . jinja2-mode))
+(eval-after-load 'jinja2-mode
+  '(progn
+     (defun xinix-jinja2-mode-defaults ()
+       (progn
+         (setq sgml-basic-offset 2)
+         ))
+     (setq xinix-jinjia2-mode-hook 'xinix-jinjia2-mode-defaults)
+
+     (add-hook 'jinja2-mode-hook (lambda ()
+                                   (run-hooks 'xinix-jinja2-mode-hook)))))
 
 (provide 'xinix-web)
 ;;; xinix-web.el ends here

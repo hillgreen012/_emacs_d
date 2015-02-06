@@ -78,7 +78,7 @@
                                           "%b"))))
 
 ;; (setq xinix-theme 'solarized-dark)
-;; (setq xinix-theme 'manoj-dark)
+(setq xinix-theme 'manoj-dark)
 (load-theme xinix-theme t)
 
 (provide 'xinix-ui)

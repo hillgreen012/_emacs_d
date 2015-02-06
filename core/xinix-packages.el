@@ -73,6 +73,9 @@
     smartrep
     undo-tree
     volatile-highlights
+    neotree
+    nyan-mode
+    golden-ratio
     zenburn-theme
     solarized-theme)
   "A list of packages to ensure are installed at launch.")

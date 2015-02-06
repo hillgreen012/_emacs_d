@@ -118,6 +118,10 @@
 (global-set-key (kbd "s->") 'ace-jump-buffer)
 (global-set-key (kbd "s-w") 'ace-window)
 
+(global-set-key (kbd "<f8>") 'neotree-toggle)
+(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "<f9>") 'golden-ratio-mode)
+
 (provide 'xinix-global-keybindings)
 
 ;;; xinix-global-keybindings.el ends here

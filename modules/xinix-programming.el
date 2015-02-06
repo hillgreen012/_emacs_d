@@ -89,5 +89,6 @@ This functions should be added to the hooks of major modes for programming."
     (global-flycheck-mode +1)
   (add-hook 'prog-mode-hook 'flycheck-mode))
 
+
 (provide 'xinix-programming)
 ;;; xinix-programming.el ends here

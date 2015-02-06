@@ -131,7 +131,8 @@ that can occur between two notifications.  The default is
     (with-current-buffer buffer
       (erc-quit-server "Asta la vista"))))
 
-(setq erc-autojoin-channels-alist '(("freenode.net" "#xinix-emacs" "#projectile")))
+;; (setq erc-autojoin-channels-alist '(("freenode.net" "#xinix-emacs" "#projectile")))
+(setq erc-autojoin-channels-alist '(("freenode.net"  "#projectile")))
 
 (provide 'xinix-erc)
 

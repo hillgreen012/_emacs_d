@@ -1,9 +1,8 @@
 ;;; init.el --- Xinix's configuration entry point.
 ;;
-;; Copyright (c) 2011 Bozhidar Batsov
+;; Copyright (c) 2011 xinix
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: http://batsov.com/xinix
 ;; Version: 1.0.0
 ;; Keywords: convenience
 
@@ -33,15 +32,31 @@
 
 ;;; Code:
 (defvar current-user
-      (getenv
-       (if (equal system-type 'windows-nt) "USERNAME" "USER")))
+  (getenv
+   (if (equal system-type 'windows-nt) "USERNAME" "USER")))
 
 (message "Xinix is powering up... Be patient, Master %s!" current-user)
 
 (when (version< emacs-version "24.1")
   (error "Xinix requires at least GNU Emacs 24.1, but you're running %s" emacs-version))
 
-;; Always load newest byte code
+;; If an Emacs Lisp file is installed in the Emacs Lisp load
+;; path (defined below), you can load it by typing M-x load-library,
+;; instead of using M-x load-file. The M-x load-library command
+;; prompts for a library name rather than a file name; it searches
+;; through each directory in the Emacs Lisp load path, trying to
+;; find a file matching that library name. If the library name
+;; is ‘foo’, it tries looking for files named foo.elc, foo.el,
+;; and foo. The default behaviour is to load the first file found.
+;; This command prefers .elc files over .el files because compiled
+;; files load and run faster. If it finds that lib.el is newer than
+;; lib.elc, it issues a warning, in case someone made changes to the
+;; .el file and forgot to recompile it, but loads the .elc file anyway.
+;; (Due to this behavior, you can save unfinished edits to Emacs
+;; Lisp source files, and not recompile until your changes are
+;; ready for use.) If you set the option load-prefer-newer to
+;; a non-nil value, however, then rather than the procedure
+;; described above, Emacs loads whichever version of the file is newest.
 (setq load-prefer-newer t)
 
 (defvar xinix-dir (file-name-directory load-file-name)
@@ -76,13 +91,13 @@ by Xinix.")
   (make-directory xinix-savefile-dir))
 
 (defun xinix-add-subfolders-to-load-path (parent-dir)
- "Add all level PARENT-DIR subdirs to the `load-path'."
- (dolist (f (directory-files parent-dir))
-   (let ((name (expand-file-name f parent-dir)))
-     (when (and (file-directory-p name)
-                (not (string-prefix-p "." f)))
-       (add-to-list 'load-path name)
-       (xinix-add-subfolders-to-load-path name)))))
+  "Add all level PARENT-DIR subdirs to the `load-path'."
+  (dolist (f (directory-files parent-dir))
+    (let ((name (expand-file-name f parent-dir)))
+      (when (and (file-directory-p name)
+                 (not (string-prefix-p "." f)))
+        (add-to-list 'load-path name)
+        (xinix-add-subfolders-to-load-path name)))))
 
 ;; add Xinix's directories to Emacs's `load-path'
 (add-to-list 'load-path xinix-core-dir)
@@ -111,7 +126,25 @@ by Xinix.")
 (require 'xinix-core)
 (require 'xinix-mode)
 (require 'xinix-editor)
+(require 'xinix-files)
+(require 'xinix-environment)
 (require 'xinix-global-keybindings)
+
+;; load your modules
+;; (require 'setup-applications)
+;; (require 'setup-communication)
+;; (require 'setup-convenience)
+;; (require 'setup-data)
+;; (require 'setup-development)
+;; (require 'setup-editing)
+;; (require 'setup-environment)
+;; (require 'setup-external)
+;; (require 'setup-faces-and-ui)
+;; (require 'setup-files)
+;; (require 'setup-help)
+;; (require 'setup-programming)
+;; (require 'setup-text)
+;; (require 'setup-local)
 
 ;; OSX specific settings
 (when (eq system-type 'darwin)
