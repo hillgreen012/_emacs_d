@@ -47,7 +47,11 @@
        ;; electric-layout-mode doesn't play nice with smartparens
        (setq-local electric-layout-rules '((?\; . after)))
        (setq mode-name "JS2")
-       (js2-imenu-extras-mode +1))
+       (js2-imenu-extras-mode +1)
+       (setq-local js2-highlight-level 3)
+       (setq-local js2-basic-offset 4)
+       (setq-local js2-pretty-multiline-declarations t)
+       (setq-local js2-indent-switch-body t))
 
      (setq xinix-js-mode-hook 'xinix-js-mode-defaults)
 

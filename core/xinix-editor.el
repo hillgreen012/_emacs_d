@@ -316,14 +316,14 @@ The body of the advice is in BODY."
       (indent-region beg end nil)))
 
 (advise-commands "indent" (yank yank-pop) after
-  "If current mode is one of `xinix-yank-indent-modes',
+                 "If current mode is one of `xinix-yank-indent-modes',
 indent yanked text (with prefix arg don't indent)."
-  (if (and (not (ad-get-arg 0))
-           (not (member major-mode xinix-indent-sensitive-modes))
-           (or (derived-mode-p 'prog-mode)
-               (member major-mode xinix-yank-indent-modes)))
-      (let ((transient-mark-mode nil))
-        (yank-advised-indent-function (region-beginning) (region-end)))))
+                 (if (and (not (ad-get-arg 0))
+                          (not (member major-mode xinix-indent-sensitive-modes))
+                          (or (derived-mode-p 'prog-mode)
+                              (member major-mode xinix-yank-indent-modes)))
+                     (let ((transient-mark-mode nil))
+                       (yank-advised-indent-function (region-beginning) (region-end)))))
 
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)

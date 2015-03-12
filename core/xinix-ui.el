@@ -40,7 +40,7 @@
   (tool-bar-mode -1))
 
 (when (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode -1))
+  (scroll-bar-mode -1))
 
 (when (fboundp 'menu-bar-mode)
   (menu-bar-mode -1))
@@ -61,11 +61,13 @@
 (line-number-mode +1)
 (column-number-mode +1)
 (size-indication-mode +1)
+(when (fboundp 'global-linum-mode)
+  (global-linum-mode +1))
 
 ;; make the fringe (gutter) smaller
 ;; the argument is a width in pixels (the default is 8)
 (when (fboundp 'fringe-mode)
-    (fringe-mode 4))
+  (fringe-mode 4))
 
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -74,11 +76,11 @@
 ;; buffer name (if the buffer isn't visiting a file)
 (setq frame-title-format
       '("" invocation-name " Xinix - " (:eval (if (buffer-file-name)
-                                            (abbreviate-file-name (buffer-file-name))
-                                          "%b"))))
+                                                  (abbreviate-file-name (buffer-file-name))
+                                                "%b"))))
 
 ;; (setq xinix-theme 'solarized-dark)
-(setq xinix-theme 'manoj-dark)
+;; (setq xinix-theme 'manoj-dark)
 (load-theme xinix-theme t)
 
 (provide 'xinix-ui)

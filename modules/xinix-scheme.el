@@ -31,10 +31,15 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(xinix-require-package 'geiser)
+(xinix-require-packages '(geiser
+                          ;; quack
+                          ;; racket-mode
+                          ))
 
 (require 'xinix-lisp)
 (require 'geiser)
+;; (require 'quack)
+;; (require 'racket-mode)
 
 ;; geiser replies on a REPL to provide autodoc and completion
 (setq geiser-mode-start-repl-p t)
@@ -43,7 +48,11 @@
 (setq geiser-repl-history-filename
       (expand-file-name "geiser-history" xinix-savefile-dir))
 
-(add-hook 'scheme-mode-hook (lambda () (run-hooks 'xinix-lisp-coding-hook)))
+;; (add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
+
+(add-hook 'scheme-mode-hook
+          (lambda ()
+            (run-hooks 'xinix-lisp-coding-hook)))
 
 (provide 'xinix-scheme)
 

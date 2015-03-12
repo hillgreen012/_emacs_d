@@ -44,7 +44,10 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist
-'("/\\(views\\|html\\|theme\\|templates\\)/.*\\.php\\'" . web-mode))
+             '("/\\(views\\|html\\|theme\\|templates\\)/.*\\.php\\'" . web-mode))
+
+(xinix-require-packages '(web-beautify))
+(require 'web-beautify)
 
 ;; make web-mode play nice with smartparens
 (setq web-mode-enable-auto-pairing nil)
@@ -86,4 +89,5 @@
                                    (run-hooks 'xinix-jinja2-mode-hook)))))
 
 (provide 'xinix-web)
+
 ;;; xinix-web.el ends here
