@@ -34,7 +34,7 @@
 
 (xinix-require-package 'htmlize)
 (require 'htmlize)
-(require 'org-publish)
+
 (require 'org-latex)
 
 (add-to-list 'auto-mode-alist '("\\.org\\’" . org-mode))
@@ -47,12 +47,12 @@
   "Insert a `LANGUAGE' type source code block in org-mode."
   (interactive
    (let ((language-set
-          '("asymtote" "awk" "calc" "C" "clojure" "comint" "css" "ditaa"
-            "dot" "emacs-lisp" "eval" "exp" "fortran" "gnuplot" "haskell"
-            "io" "java" "js" "keys" "latex" "ledger" "lilypond" "lisp"
-            "lob" "matlab" "maxima" "mscgen" "ocaml" "octave" "org" "perl"
-            "picolisp" "plantuml" "python" "ref" "R" "ruby" "sass" "scala"
-            "scheme" "screen" "sh" "shen" "sql" "sqlite" "table" "tangle")))
+	  '("asymtote" "awk" "calc" "C" "clojure" "comint" "css" "ditaa"
+	    "dot" "emacs-lisp" "eval" "exp" "fortran" "gnuplot" "haskell"
+	    "io" "java" "js" "keys" "latex" "ledger" "lilypond" "lisp"
+	    "lob" "matlab" "maxima" "mscgen" "ocaml" "octave" "org" "perl"
+	    "picolisp" "plantuml" "python" "ref" "R" "ruby" "sass" "scala"
+	    "scheme" "screen" "sh" "shen" "sql" "sqlite" "table" "tangle")))
      (list (ido-completing-read "Language: " language-set))))
   (progn
     (insert (format "#+BEGIN_SRC %s\n" language))
@@ -65,12 +65,12 @@
   "Insert `LANGUAGE' source code block in org-mode with `NAME', `SWITCHES' and `HEADERS' properties."
   (interactive
    (let ((language-set
-          '("asymtote" "awk" "calc" "C" "clojure" "comint" "css" "ditaa"
-            "dot" "emacs-lisp" "eval" "exp" "fortran" "gnuplot" "haskell"
-            "io" "java" "js" "keys" "latex" "ledger" "lilypond" "lisp"
-            "lob" "matlab" "maxima" "mscgen" "ocaml" "octave" "org" "perl"
-            "picolisp" "plantuml" "python" "ref" "R" "ruby" "sass" "scala"
-            "scheme" "screen" "sh" "shen" "sql" "sqlite" "table" "tangle")))
+	  '("asymtote" "awk" "calc" "C" "clojure" "comint" "css" "ditaa"
+	    "dot" "emacs-lisp" "eval" "exp" "fortran" "gnuplot" "haskell"
+	    "io" "java" "js" "keys" "latex" "ledger" "lilypond" "lisp"
+	    "lob" "matlab" "maxima" "mscgen" "ocaml" "octave" "org" "perl"
+	    "picolisp" "plantuml" "python" "ref" "R" "ruby" "sass" "scala"
+	    "scheme" "screen" "sh" "shen" "sql" "sqlite" "table" "tangle")))
      (list
       (read-string "Name: ")
       (ido-completing-read "Language: " language-set)
@@ -97,7 +97,8 @@
     (push `(xinix-mode . ,newmap) minor-mode-overriding-map-alist))
   (let ((org-latex-to-pdf '("xelatex -interaction nonstopmode %f"
                             "xelatex -interaction nonstopmode %f"
-                            ("xelatex %f")
+                            ;; use below command(s) to convert latex fragments
+                            ;; ("xelatex %f")
                             )))
     (if (boundp 'org-latex-to-pdf-process)
         (setq org-latex-to-pdf-process
@@ -209,44 +210,11 @@
    org-completion-use-ido t
    org-export-html-style-include-default t
    org-export-html-style
-   "
-<style type=\"text/css\">
-<!--/*--><![CDATA[/*><!--*/
-html {
-        font-family: \"Courier Pitch 10\", Courier, monospace;
-        font-size: 100%;
-        font: 10.5pt Consola, \"Bitstream Vera Sans\", Courier New, helvetica;
-        /* background: rgba(200,200,200,0.50); */
-}
-.src {
-        background-color: #4f8f8f;
-        line-height: 1.2;
-        font-family: \"Courier 10 Pitch\";
-        font-size: 90%;
-        color: wheat;
-        -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.23);
-        /* -webkit-box-shadow: #333 3px 3px 4px; */
-        -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.23);
-        -o-box-shadow: #033 3px 2px 4px;
-        box-shadow: #333 3px 2px 4px;
-        -moz-box-radius: 2px;
-        -webkit-border-radius: 2px;
-        border-radius: 2px;
-}
-/*]]>*/-->
-</style>
-"
-   org-export-latex-listings t)
-  (setq org-publish-project-alist
-        '(("org-static"
-           :base-directory "~/.emacs.d/vendor/org/static/"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :publishing-directory "./"
-           :recursive t
-           :publishing-function org-publish-attachment)
-          ("org" :components ("org-static")))))
+   "<style type=\"text/css\">\n <!--/*--><![CDATA[/*><!--*/\n  html {\n    font-family: \"Courier Pitch 10\", Courier, monospace;\n    font-size: 100%;\n    /* background: rgba(200,200,200,0.50); */\n}\n\n.src {\n    background-color: #2f2f2f;\n    line-height: 1.3;\n    font-family: \"Courier 10 Pitch\";\n    font-size: 90%;\n    color: wheat;\n    -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.23);\n    /* -webkit-box-shadow: #333 3px 3px 4px; */\n    -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.23);\n    -o-box-shadow: #033 3px 2px 4px;\n    box-shadow: #333 3px 2px 4px;\n\n    -moz-box-radius: 2px;\n    -webkit-border-radius: 2px;\n    border-radius: 2px;\n}\n  /*]]>*/-->\n</style>"
+   org-export-latex-listings t))
 
-(setfq org-confirm-babel-evaluate nil)
+
+(setq org-confirm-babel-evaluate nil)
 ;; Auctex
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -287,7 +255,10 @@ html {
 \\usepackage{latexsym}
 \\usepackage{natbib}
 \\usepackage{fancyhdr}
-\\usepackage[xetex,colorlinks=true,CJKbookmarks=true,linkcolor=blue,urlcolor=blue,menucolor=blue]{hyperref}
+\\usepackage[xetex,colorlinks=true,CJKbookmarks=true,
+linkcolor=blue,
+urlcolor=blue,
+menucolor=blue]{hyperref}
 \\usepackage{fontspec,xunicode,xltxtra}
 \\setmainfont[BoldFont=Ubuntu Mono Bold]{Ubuntu Mono}  
 \\setsansfont[BoldFont=Ubuntu Mono Bold]{Ubuntu Mono}  

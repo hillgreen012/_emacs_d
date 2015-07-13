@@ -81,7 +81,7 @@
 
 ;; (setq xinix-theme 'solarized-dark)
 ;; (setq xinix-theme 'manoj-dark)
-(load-theme xinix-theme t)
+;; (load-theme xinix-theme t)
 
 (provide 'xinix-ui)
 ;;; xinix-ui.el ends here

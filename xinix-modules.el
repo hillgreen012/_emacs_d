@@ -16,6 +16,7 @@
 (require 'xinix-coffee)
 (require 'xinix-common-lisp)
 (require 'xinix-css)
+(require 'xinix-dot)
 (require 'xinix-emacs-lisp)
 (require 'xinix-erlang)
 (require 'xinix-elixir)
@@ -25,8 +26,9 @@
 (require 'xinix-latex)
 (require 'xinix-lisp)
 (require 'xinix-ocaml)
-(require 'xinix-org) ;; Org-mode helps you keep TODO lists, notes and more
+(require 'xinix-org);; Org-mode helps you keep TODO lists, notes and more
 (require 'xinix-perl)
+(require 'xinix-plantuml)
 (require 'xinix-python)
 (require 'xinix-ruby)
 (require 'xinix-scala)

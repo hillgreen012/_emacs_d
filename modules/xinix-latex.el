@@ -77,6 +77,13 @@
   (turn-on-auto-fill)
   (abbrev-mode +1)
   (smartparens-mode +1)
+  (setq TeX-auto-untabify t
+        TeX-engine 'xetex
+        TeX-show-compilation t)
+  (TeX-global-PDF-mode t)
+  (setq TeX-save-query nil)
+  (imenu-add-menubar-index)
+  (define-key LeTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)
   (case xinix-latex-fast-math-entry
     (LaTeX-math-mode (LaTeX-math-mode 1))
     (cdlatex (turn-on-cdlatex))))

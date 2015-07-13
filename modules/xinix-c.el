@@ -35,7 +35,7 @@
 (require 'xinix-programming)
 
 (defun xinix-c-mode-common-defaults ()
-  (setq c-basic-offset 4)
+  (setq c-basic-offset 8)
   (c-set-offset 'substatement-open 0))
 
 (setq xinix-c-mode-common-hook 'xinix-c-mode-common-defaults)

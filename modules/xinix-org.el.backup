@@ -1,0 +1,243 @@
+;;; xinix-org.el --- Emacs Xinix: org-mode configuration.
+;;
+;; Copyright © 2011-2014 Bozhidar Batsov
+;;
+;; Author: Bozhidar Batsov <bozhidar@batsov.com>
+;; URL: https://github.com/bbatsov/xinix
+;; Version: 1.0.0
+;; Keywords: convenience
+
+;; This file is not part of GNU Emacs.
+
+;;; Commentary:
+
+;; Some basic configuration for org-mode.
+
+;;; License:
+
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License
+;; as published by the Free Software Foundation; either version 3
+;; of the License, or (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+;;; Code:
+
+(xinix-require-package 'htmlize)
+(require 'htmlize)
+
+(require 'org-latex)
+
+(add-to-list 'auto-mode-alist '("\\.org\\’" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(setq org-log-done t)
+
+(defun org-insert-src-block (language)
+  "Insert a `LANGUAGE' type source code block in org-mode."
+  (interactive
+   (let ((language-set
+	  '("asymtote" "awk" "calc" "C" "clojure" "comint" "css" "ditaa"
+	    "dot" "emacs-lisp" "eval" "exp" "fortran" "gnuplot" "haskell"
+	    "io" "java" "js" "keys" "latex" "ledger" "lilypond" "lisp"
+	    "lob" "matlab" "maxima" "mscgen" "ocaml" "octave" "org" "perl"
+	    "picolisp" "plantuml" "python" "ref" "R" "ruby" "sass" "scala"
+	    "scheme" "screen" "sh" "shen" "sql" "sqlite" "table" "tangle")))
+     (list (ido-completing-read "Language: " language-set))))
+  (progn
+    (insert (format "#+BEGIN_SRC %s\n" language))
+    (newline)
+    (insert "#+END_SRC")
+    (previous-line 1)
+    (org-edit-src-code)))
+
+(defun org-insert-rich-src-block (name language switches headers)
+  "Insert `LANGUAGE' source code block in org-mode with `NAME', `SWITCHES' and `HEADERS' properties."
+  (interactive
+   (let ((language-set
+	  '("asymtote" "awk" "calc" "C" "clojure" "comint" "css" "ditaa"
+	    "dot" "emacs-lisp" "eval" "exp" "fortran" "gnuplot" "haskell"
+	    "io" "java" "js" "keys" "latex" "ledger" "lilypond" "lisp"
+	    "lob" "matlab" "maxima" "mscgen" "ocaml" "octave" "org" "perl"
+	    "picolisp" "plantuml" "python" "ref" "R" "ruby" "sass" "scala"
+	    "scheme" "screen" "sh" "shen" "sql" "sqlite" "table" "tangle")))
+     (list
+      (read-string "Name: ")
+      (ido-completing-read "Language: " language-set)
+      (read-string "Switches{-n -r -l}: ")
+      (read-string "Headers{:results :file :file-desc :dir :exports :tangle :mkdirp :comments :padline :no-expand :session :noweb :noweb-ref :noweb-sep :cache :sep :hlines :colnames :rownames :shebang :tangle-mode :eval :wrap :post :prologue :epilogue :var}: "))))
+  (progn
+    (unless (string-equal name "")
+      (insert (format "#+NAME: %s\n" name)))
+    (insert (format "#+BEGIN_SRC %s %s %s\n" language switches headers))
+    (newline)
+    (insert "#+END_SRC")
+    (previous-line 1)
+    (org-edit-src-code)))
+
+(defun multiply-by-seven (number)       ; Interactive version.
+  "Multiply NUMBER by seven."
+  (interactive "p")
+  (message "The result is %d" (* 7 number)))
+
+(defun xinix-org-mode-defaults ()
+  (let ((oldmap
+         (cdr (assoc 'xinix-mode minor-mode-map-alist)))
+        (newmap
+         (make-sparse-keymap)))
+    (set-keymap-parent newmap oldmap)
+    (define-key newmap (kbd "C-c +") nil)
+    (define-key newmap (kbd "C-c -") nil)
+    (make-local-variable 'minor-mode-overriding-map-alist)
+    (push `(xinix-mode . ,newmap) minor-mode-overriding-map-alist))
+  (let ((org-latex-to-pdf '("xelatex -interaction nonstopmode %f"
+                            "xelatex -interaction nonstopmode %f"
+                            ;; use below command(s) to convert latex fragments
+                            ;; ("xelatex %f")
+                            )))
+    (if (boundp 'org-latex-to-pdf-process)
+        (setq org-latex-to-pdf-process
+              org-latex-to-pdf)
+      (setq org-latex-pdf-process
+            org-latex-to-pdf)))
+  (turn-on-font-lock)
+  (iimage-mode)
+  ;; Make Org use ido-completing-read for most of its completing prompts.
+  (ido-mode)
+  ;; 
+  (setq ps-paper-type 'a4
+        ps-font-size 12.0
+        ps-print-header nil
+        ps-landscape-mode nil)
+  ;;解决在编辑中文时不会自动折行的问题
+  (setq truncate-lines nil)
+  ;; (setq org-src-fontify-natively t)
+  ;; (setq org-export-with-toc t)
+  ;; (setq org-export-with-section-numbers 8)
+  ;; (setq org-use-sub-superscripts nil)
+  (set-face-attribute 'org-level-1 nil :height 1.6 :bold t)
+  (set-face-attribute 'org-level-2 nil :height 1.5 :bold t)
+  (set-face-attribute 'org-level-3 nil :height 1.4 :bold t)
+  (set-face-attribute 'org-level-4 nil :height 1.3 :bold t)
+  (set-face-attribute 'org-level-5 nil :height 1.2 :bold t)
+  (set-face-attribute 'org-level-6 nil :height 1.1 :bold t)
+  (define-key org-mode-map (kbd "×") (kbd "*"))
+  (define-key org-mode-map (kbd "——") (kbd "-"))
+  (set-default-font "Courier 10 Pitch 10")
+  (if (string= system-type "windows-nt")
+      (set-fontset-font "fontset-default" 'unicode "宋体 12")
+    (set-fontset-font "fontset-default" 'unicode "Ubuntu Mono 10"))
+  (setq org-todo-keywords
+        '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")
+          (sequence "TODO" "DONE")
+          (sequence "TOFUCK" "FUCKING" "FUCKED")))
+  (setq org-plantuml-jar-path
+        (expand-file-name "~/.emacs.d/vendor/org/plantuml.jar"))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((asymptote . t)
+     (awk . t)
+     (calc . t)
+     (C . t)
+     (clojure . t)
+     (comint . t)
+     (css . t)
+     (ditaa . t)
+     (dot . t)
+     (emacs-lisp . t)
+     (eval . t)
+     (exp . t)
+     (fortran . t)
+     (gnuplot . t)
+     (haskell . t)
+     (io . t)
+     (java . t)
+     (js . t)
+     (keys . t)
+     (latex . t)
+     (ledger . t)
+     (lilypond . t)
+     (lisp . t)
+     (lob . t)
+     (matlab . t)
+     (maxima . t)
+     (mscgen . t)
+     (ocaml . t)
+     (octave . t)
+     (org . t)
+     (perl . t)
+     (picolisp . t)
+     (plantuml . t)
+     (python . t)
+     (ref . t)
+     (R . t)
+     (ruby . t)
+     (sass . t)
+     (scala . t)
+     (scheme . t)
+     (screen . t)
+     (sh . t)
+     (shen . t)
+     (sql . t)
+     (sqlite . t)
+     (table . t)
+     (tangle . t)))
+  ;; turn on flyspell-mode by default
+  ;; (setq-default flyspell-mode t)
+  ;; C-TAB for expanding
+  (local-set-key (kbd "C-<tab>") 'yas/expand-from-trigger-key)
+  ;; keybinding for editing source code blocks
+  (local-set-key (kbd "C-c s e") 'org-edit-src-code)
+  ;; keybinding for inserting code blocks
+  (local-set-key (kbd "C-c s i") 'org-insert-src-block)
+  (setq-default
+   org-startup-indented t
+   org-src-fontify-natively t
+   org-export-with-toc t
+   org-export-with-section-numbers 8
+   org-use-sub-superscripts nil
+   org-confirm-babel-evaluate nil
+   org-log-done 'note
+   org-inline-image-overlays nil
+   ;; Make Org use ido-completing-read for most of its completing prompts.
+   org-outline-path-complete-in-steps nil
+   org-completion-use-ido t
+   org-export-html-style-include-default t
+   org-export-html-style
+   "<style type=\"text/css\">\n <!--/*--><![CDATA[/*><!--*/\n  html {\n    font-family: \"Courier Pitch 10\", Courier, monospace;\n    font-size: 100%;\n    /* background: rgba(200,200,200,0.50); */\n}\n\n.src {\n    background-color: #2f4f4f;\n    line-height: 1.6;\n    font-family: \"Courier 10 Pitch\";\n    font-size: 95%;\n    color: wheat;\n    -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.23);\n    /* -webkit-box-shadow: #333 3px 3px 4px; */\n    -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.23);\n    -o-box-shadow: #033 3px 2px 4px;\n    box-shadow: #333 3px 2px 4px;\n\n    -moz-box-radius: 2px;\n    -webkit-border-radius: 2px;\n    border-radius: 2px;\n}\n  /*]]>*/-->\n</style>"
+   org-export-latex-listings t)
+  (add-to-list 'org-export-latex-packages-alist
+               '(("AUTO" "inputenc" t)))
+  (add-to-list 'org-export-latex-classes
+               '("org-article"
+                 "\\documentclass{org-article}
+                 [NO-DEFAULT-PACKAGES]
+                 [PACKAGES]
+                 [EXTRA]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  )
+
+(setq xinix-org-mode-hook
+      'xinix-org-mode-defaults)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (run-hooks 'xinix-org-mode-hook)))
+
+(provide 'xinix-org)
+
+;;; xinix-org.el ends here
