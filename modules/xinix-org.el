@@ -236,15 +236,15 @@ html {
 /*]]>*/-->
 </style>
 "
-   org-export-latex-listings t)
-  (setq org-publish-project-alist
-        '(("org-static"
-           :base-directory "~/.emacs.d/vendor/org/static/"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :publishing-directory "./"
-           :recursive t
-           :publishing-function org-publish-attachment)
-          ("org" :components ("org-static")))))
+   org-export-latex-listings t
+   org-publish-project-alist
+   '(("org-static"
+      :base-directory "~/.emacs.d/vendor/org/static/"
+      :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+      :publishing-directory "./"
+      :recursive t
+      :publishing-function org-publish-attachment)
+     ("org" :components ("org-static")))))
 
 (setfq org-confirm-babel-evaluate nil)
 ;; Auctex
