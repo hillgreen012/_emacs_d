@@ -45,6 +45,21 @@
 
 (golden-ratio-mode -1)
 
+
+;; Dejavu Sans Mono 9 --- WenQuanYi Micro Hei Mono 12
+;; Consolas 11 --- Microsoft Yahei 16
+;; Liberation Mono 12 --- WenQuanYi Micro Mono 15
+(set-language-environment "UTF-8")
+(set-locale-environment "UTF-8")
+(if (and (fboundp 'daemonp) (daemonp))
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (set-fontset-font "fontset-default" 'unicode "WenQuanYi Micro Hei Mono 12"))))
+  (set-fontset-font "fontset-default" 'unicode "WenQuanYi Micro Hei Mono 12"))
+;; (set-fontset-font "fontset-default" 'unicode "WenQuanYi Micro Hei Mono 12")
+;; (set-default-font "Dejavu Sans Mono 9")
+
 (provide 'xinix-environment)
 
 ;;; xinix-environment.el ends here

@@ -127,10 +127,7 @@
   ;; (set-face-attribute 'org-level-10 nil :height 1.1 :bold t)
   (define-key org-mode-map (kbd "×") (kbd "*"))
   (define-key org-mode-map (kbd "——") (kbd "-"))
-  (set-default-font "Courier 10 Pitch 11")
-  (if (string= system-type "windows-nt")
-      (set-fontset-font "fontset-default" 'unicode "宋体 12")
-    (set-fontset-font "fontset-default" 'unicode "Ubuntu Mono 11"))
+
   (setq org-todo-keywords
         '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")
           (sequence "TODO" "DONE")
@@ -219,7 +216,8 @@ html {
         /* background: rgba(200,200,200,0.50); */
 }
 .src {
-        background-color: #4f8f8f;
+        background-color: #404;
+        background-color: #000;
         line-height: 1.2;
         font-family: \"Courier 10 Pitch\";
         font-size: 90%;
@@ -246,7 +244,6 @@ html {
       :publishing-function org-publish-attachment)
      ("org" :components ("org-static")))))
 
-(setfq org-confirm-babel-evaluate nil)
 ;; Auctex
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -388,11 +385,6 @@ html {
                 "\\end{frame}"
                 "\\begin{frame}[fragile]\\frametitle{%s}"
                 "\\end{frame}")))
-
-(setq ps-paper-type 'a4
-      ps-font-size 12.0
-      ps-print-header nil
-      ps-landscape-mode nil)
 
 (setq xinix-org-mode-hook
       'xinix-org-mode-defaults)
