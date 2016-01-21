@@ -31,6 +31,7 @@
 (require 'xinix-plantuml)
 (require 'xinix-python)
 (require 'xinix-ruby)
+(require 'xinix-rust)
 (require 'xinix-scala)
 (require 'xinix-scheme)
 (require 'xinix-shell)
