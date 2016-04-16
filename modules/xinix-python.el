@@ -1,43 +1,9 @@
-;;; xinix-python.el --- Emacs Xinix: python.el configuration.
-;;
-;; Copyright © 2011-2014 Bozhidar Batsov
-;;
-;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: https://github.com/bbatsov/xinix
-;; Version: 1.0.0
-;; Keywords: convenience
+(xinix-require-packages '(elpy flycheck py-autopep8))
 
-;; This file is not part of GNU Emacs.
-
-;;; Commentary:
-
-;; Some basic configuration for python.el (the latest and greatest
-;; Python mode Emacs has to offer).
-
-;;; License:
-
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License
-;; as published by the Free Software Foundation; either version 3
-;; of the License, or (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
-
-;;; Code:
-
-(xinix-require-package 'anaconda-mode)
-
-(when (boundp 'company-backends)
-  (xinix-require-package 'company-anaconda)
-  (add-to-list 'company-backends 'company-anaconda))
+;; (xinix-require-package 'anaconda-mode)
+;; (when (boundp 'company-backends)
+;;   (xinix-require-package 'company-anaconda)
+;;   (add-to-list 'company-backends 'company-anaconda))
 
 (require 'electric)
 (require 'xinix-programming)
@@ -89,8 +55,20 @@
 (defun xinix-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  (anaconda-mode)
-  (eldoc-mode)
+  ;; (anaconda-mode)
+  ;; (eldoc-mode)
+  (elpy-use-ipython)
+  (elpy-enable)
+  (setq elpy-modules
+        (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook
+            'flycheck-mode)
+  ;; (add-hook 'elpy-mode-hook
+  ;;           'py-autopep8)
+  (add-hook 'elpy-mode-hook
+            'py-autopep8-enable-on-save)
+  (add-hook 'elpy-mode-hook 'xinix-python-mode-set-encoding)
+  
   (setq-local electric-layout-rules
               '((?: . (lambda ()
                         (and (zerop (first (syntax-ppss)))
@@ -101,7 +79,8 @@
                 #'python-imenu-create-flat-index))
   (add-hook 'post-self-insert-hook
             #'electric-layout-post-self-insert-function nil 'local)
-  (add-hook 'after-save-hook 'xinix-python-mode-set-encoding nil 'local))
+  (add-hook 'after-save-hook 'xinix-python-mode-set-encoding nil 'local)
+  )
 
 (setq xinix-python-mode-hook 'xinix-python-mode-defaults)
 

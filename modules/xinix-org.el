@@ -32,10 +32,16 @@
 
 ;;; Code:
 
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;; (xinix-require-packages '(org org-plus-contrib))
+
 (xinix-require-package 'htmlize)
 (require 'htmlize)
+;; (require 'org-install)
 (require 'org-publish)
+;; (require 'ox-publish)
 (require 'org-latex)
+;; (require 'ox-latex)
 
 (add-to-list 'auto-mode-alist '("\\.org\\’" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)

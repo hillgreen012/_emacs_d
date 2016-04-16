@@ -76,7 +76,7 @@
 
 (xinix-require-package 'jinja2-mode)
 (require 'jinja2-mode)
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . jinja2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.html?\\'" . jinja2-mode))
 (eval-after-load 'jinja2-mode
   '(progn
      (defun xinix-jinja2-mode-defaults ()
